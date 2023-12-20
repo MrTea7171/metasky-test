@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import FormComponent from "@/app/components/FormComponent";
 import AnimatedPage from "@/app/components/layouts/AnimatedPage";
 import StandardContainer from "@/app/components/layouts/StandardContainer";
