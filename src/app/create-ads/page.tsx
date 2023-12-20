@@ -62,7 +62,7 @@ const CreateAds = () => {
             />
           </Box>
           <Box display={"flex"} justifyContent={"flex-end"}>
-            <Link href={`/create-ad-form/${createAdType}`}>
+            <Link href={`/create-ads/${createAdType}`}>
               <StandardButton displayText={"Next"} disabled={!createAdType} />
             </Link>
           </Box>
