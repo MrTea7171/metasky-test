@@ -1,3 +1,4 @@
+"use client";
 import { Box, Grid } from "@mui/material";
 import { useState } from "react";
 import { useFormik } from "formik";

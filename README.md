@@ -6,7 +6,7 @@
 
 ## Technologies Used
 
-- **React:** A JavaScript library for building user interfaces.
+- **NextJs:** A React FrameWork to build production ready apps.
 - **TypeScript:** A statically typed superset of JavaScript.
 - **Material-UI (MUI):** A popular React UI framework.
 - **React-Router-Dom:** A library for handling routing in React applications.
