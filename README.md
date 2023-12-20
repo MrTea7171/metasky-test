@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Ads Dashboard
 
-## Getting Started
+## Project Overview
 
-First, run the development server:
+**Ads Dashboard** is a React and TypeScript-based dashboard application with an elegant design and smooth transitions. It utilizes various technologies and React libraries to create a feature-rich platform for managing advertisements.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Technologies Used
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **React:** A JavaScript library for building user interfaces.
+- **TypeScript:** A statically typed superset of JavaScript.
+- **Material-UI (MUI):** A popular React UI framework.
+- **React-Router-Dom:** A library for handling routing in React applications.
+- **AGGrid:** A powerful data grid component for React.
+- **Framer Motion:** A motion library for React that adds smooth animations and transitions.
+- **Formik:** A form management library for React applications.
+- **Yup:** A JavaScript schema validation library.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Features
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### 1. Lazy Loading
 
-## Learn More
+- The application optimizes performance by using lazy loading, taking care of suspension and handling 404 errors gracefully.
 
-To learn more about Next.js, take a look at the following resources:
+### 2. Reusable Generic Components
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- A range of reusable generic components is designed and implemented, including a Standard Dashboard, Standard Button, and more, used throughout the application.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### 3. Page Transition Effect
 
-## Deploy on Vercel
+- Smooth user experiences are achieved by adding page transition effects using Framer Motion.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 4. Form Validation
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Forms are validated using Formik and Yup, providing a flexible and easily modifiable approach to form validation.
+
+### 5. Clean Code Architecture
+
+- The codebase follows a clean code architecture, making it easy to read and modify.
+
+### Additional Features:
+
+- Top navigation with options for "Dashboard" and "Create Ad."
+- Tables support sorting options (High to Low and Low to High).
+- A toggle for Ads Insights displays a doughnut chart and table.
+- A dropdown for matrices in Ads Insights allows users to select a metric and display data in the doughnut chart.
+- Based on checkboxes (Text Ad and/or Media Ad), the app redirects to the Fill Data page and displays respective inputs.
+- After submitting the form, there's a redirect to "Ads Submitted," a 0.6-second wait, and a final redirect to the "Create Ads" page.
+
+## Installation and Usage
+
+1. Clone this repository.
+
+2. Install the required dependencies:
+
+## Installation and Usage
+
+1. Clone this repository.
+
+2. Install the required dependencies:
+
+   ```
+    npm install
+   ```
+
+3. Start the development server f:
+   ```
+   npm run dev
+   ```

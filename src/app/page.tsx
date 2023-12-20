@@ -1,95 +1,101 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+"use client";
+import { Box } from "@mui/material";
+import React from "react";
+import FormComponent from "./components/FormComponent";
+import StandardButton from "./components/layouts/StandardButton";
+import { useRouter } from "next/navigation";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import isAuth from "./components/auth/isAuth";
+import AnimatedPage from "./components/layouts/AnimatedPage";
+import { login } from "@/store/authSlice";
+import { useDispatch } from "react-redux";
 
-export default function Home() {
+const LoginPage = () => {
+  const router = useRouter();
+  const dispatch = useDispatch();
+  var mailformat = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+  const handleSuccess = async (data: typeof inititalValues) => {
+    localStorage.setItem("credentials", JSON.stringify(data));
+    dispatch(login());
+    router.push("/dashboard");
+  };
+
+  const inititalValues = {
+    email: "",
+    password: "",
+  };
+  const {
+    values,
+    touched,
+    errors,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    isSubmitting,
+    isValid,
+  } = useFormik({
+    initialValues: inititalValues,
+    validationSchema: Yup.object().shape({
+      email: Yup.string()
+        .matches(mailformat, "Please Enter valid email id")
+        .required("This field is required"),
+      password: Yup.string().required("This field is required"),
+    }),
+    onSubmit: handleSuccess,
+  });
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <AnimatedPage>
+      <Box
+        display={"flex"}
+        justifyContent={"center"}
+        height={"90vh"}
+        alignItems={"center"}
+      >
+        <form onSubmit={handleSubmit}>
+          <Box
+            width={"400px"}
+            border={"2px solid #f3f3f3"}
+            padding={"40px"}
+            borderRadius={"10px"}
+            display={"flex"}
+            flexDirection={"column"}
+            gap={"10px"}
           >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
+            <FormComponent
+              label="Email"
+              placeholder="Enter Email"
+              name={"email"}
+              value={values.email}
+              handleChange={handleChange}
+              handleBlur={handleBlur}
+              error={Boolean(touched.email && Boolean(errors.email))}
+              helperText={touched.email ? errors.email ?? "" : ""}
             />
-          </a>
-        </div>
-      </div>
+            <FormComponent
+              label="Password"
+              placeholder="Enter Password"
+              name={"password"}
+              value={values.password}
+              handleChange={handleChange}
+              handleBlur={handleBlur}
+              error={Boolean(touched.password && Boolean(errors.password))}
+              helperText={touched.password ? errors.password ?? "" : ""}
+            />
+            <StandardButton
+              // onClick={handleSuccess}
+              disabled={isSubmitting || !isValid}
+              type="submit"
+              displayText={isSubmitting ? "Authenicating..." : "Login"}
+              sx={{
+                width: "100%",
+              }}
+            />
+          </Box>
+        </form>
+      </Box>
+    </AnimatedPage>
+  );
+};
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
-}
+export default isAuth(LoginPage);
